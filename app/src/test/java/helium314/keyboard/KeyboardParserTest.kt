@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+`// SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard
 
 import android.view.inputmethod.EditorInfo
@@ -465,7 +465,12 @@ f""", // no newline at the end
             else LayoutParser.parseSimpleString(content)
         }
     }
-
+    @Test fun longDeleteRemovesWord() {
+        val text = "I have some reading to do for my critique group"
+	// simulate pressing keycode on 'reading'
+	val newText = text.replace(" reading", "")
+	assertEquals(text, newText)
+    }
     private data class Expected(val code: Int, val label: String? = null, val icon: String? = null, val text: String? = null, val popups: List<Pair<String?, Int>>? = null)
 
     private fun assertIsExpected(json: String, expected: Expected) {
